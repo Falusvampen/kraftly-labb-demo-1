@@ -11,8 +11,8 @@ export const averagePrice = (hours) => {
     sum += hours[i].price
   }
 
-  // Dygnet har 24 timmar, så vi delar på 24.
-  return Math.round((sum / 24) * 100) / 100
+  // Delar med antalet timmar som faktiskt finns i listan
+  return Math.round((sum / hours.length) * 100) / 100
 }
 
 /** Dygnets högsta pris. */
