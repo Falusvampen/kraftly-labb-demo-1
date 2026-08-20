@@ -23,18 +23,23 @@
     </div>
 
     <div class="card">
-      <PriceTable :hours="hours" :threshold="threshold" :average="average" />
+      <PriceTable
+        :hours="hours"
+        :threshold="threshold"
+        :average="average"
+        :expensive-hours="expensive"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import PriceFilter from './components/PriceFilter.vue'
-import PriceTable from './components/PriceTable.vue'
-import { averagePrice, peakPrice, expensiveHours } from './utils/prices'
+import { computed, ref } from "vue";
+import PriceFilter from "./components/PriceFilter.vue";
+import PriceTable from "./components/PriceTable.vue";
+import { averagePrice, peakPrice, expensiveHours } from "./utils/prices";
 
-const today = '19 augusti 2026'
+const today = "19 augusti 2026";
 
 // Statisk data så appen kan köras utan API.
 const hours = ref([
@@ -60,11 +65,11 @@ const hours = ref([
   { hour: 19, price: 1.83 },
   { hour: 20, price: 1.29 },
   { hour: 21, price: 0.96 },
-])
+]);
 
-const threshold = ref(1.0)
+const threshold = ref(1.0);
 
-const average = computed(() => averagePrice(hours.value))
-const peak = computed(() => peakPrice(hours.value))
-const expensive = computed(() => expensiveHours(hours.value, threshold.value))
+const average = computed(() => averagePrice(hours.value));
+const peak = computed(() => peakPrice(hours.value));
+const expensive = computed(() => expensiveHours(hours.value, threshold.value));
 </script>

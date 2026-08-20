@@ -8,7 +8,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="hour in hours" :key="hour.hour" :class="{ 'is-high': hour.price >= threshold }">
+      <tr
+        v-for="hour in hours"
+        :key="hour.hour"
+        :class="{ 'is-high': props.expensiveHours.includes(hour) }"
+      >
         <td>{{ formatHour(hour.hour) }}</td>
         <td>{{ hour.price.toFixed(2) }} kr/kWh</td>
         <td>{{ diffLabel(hour.price) }}</td>
@@ -18,17 +22,19 @@
 </template>
 
 <script setup>
-import { formatHour } from '../utils/prices'
+import { formatHour } from "../utils/prices";
+import { expensiveHours } from "../utils/prices";
 
 const props = defineProps({
   hours: { type: Array, default: () => [] },
   threshold: { type: Number, default: 0 },
   average: { type: Number, default: 0 },
-})
+  expensiveHours: { type: Array, default: () => [] },
+});
 
 const diffLabel = (price) => {
-  if (!props.average) return '–'
-  const diff = Math.round(((price - props.average) / props.average) * 100)
-  return diff > 0 ? `+${diff} %` : `${diff} %`
-}
+  if (!props.average) return "–";
+  const diff = Math.round(((price - props.average) / props.average) * 100);
+  return diff > 0 ? `+${diff} %` : `${diff} %`;
+};
 </script>
