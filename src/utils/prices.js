@@ -21,7 +21,7 @@ export const peakPrice = (hours) => {
   return hours.reduce((max, hour) => (hour.price > max ? hour.price : max), 0);
 };
 
-/** Timmar vars pris ligger på eller över gränsen. */
+/** Timmar vars pris ligger över gränsen. */
 export const expensiveHours = (hours, threshold) => {
   if (!Array.isArray(hours)) return [];
   return hours.filter((hour) => hour.price > threshold);
