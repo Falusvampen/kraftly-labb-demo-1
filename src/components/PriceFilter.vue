@@ -31,7 +31,7 @@ const apply = () => {
 
 const reset = () => {
   // Nollställer fältet.
-  local.value = 1.0;
-  emit("update:modelValue", local.value);
+  local.value = 1;
+  apply();
 };
 </script>
